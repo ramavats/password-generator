@@ -13,6 +13,11 @@ class PasswordGenerator extends Component {
     };
   }
 
+  componentDidMount() {
+    // Generate the initial password when the component mounts.
+    this.generatePassword();
+  }
+
   generatePassword = () => {
     const { length, includeUppercase, includeLowercase, includeNumbers, includeSymbols } = this.state;
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -40,11 +45,17 @@ class PasswordGenerator extends Component {
   handleInputChange = (event) => {
     const { name, type, value, checked } = event.target;
     const newValue = type === 'checkbox' ? checked : value;
-    this.setState({ [name]: newValue });
+    this.setState({ [name]: newValue }, () => {
+      // Regenerate the password whenever input values change.
+      this.generatePassword();
+    });
   };
 
   handleLengthChange = (event) => {
-    this.setState({ length: event.target.value });
+    this.setState({ length: event.target.value }, () => {
+      // Regenerate the password whenever the length changes.
+      this.generatePassword();
+    });
   };
 
 
@@ -58,7 +69,7 @@ class PasswordGenerator extends Component {
             type="range"
             name="length"
             min="8"
-            max="32"
+            max="50"
             value={this.state.length}
             onChange={this.handleLengthChange}
           />
