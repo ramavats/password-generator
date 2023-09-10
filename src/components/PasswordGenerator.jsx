@@ -56,20 +56,43 @@ class PasswordGenerator extends Component {
       // Regenerate the password whenever the length changes.
       this.generatePassword();
     });
+
+  };
+
+  handleCopyClick = () => {
+    const { password } = this.state;
+
+    if (password) {
+      // Create a textarea element to facilitate copying.
+      const textarea = document.createElement('textarea');
+      textarea.value = password;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+
+      alert('Password copied to clipboard');
+    }
   };
 
 
   render() {
     return (
       <div>
-        <h1 className='bg-black text-white text-center text-2xl p-2 mb-2'>Password Generator</h1>
+        <h1 className='bg-black text-white text-center text-2xl p-2'>Password Generator</h1>
+        <div className='flex justify-center items-center p-2'>
+          <div className='flex justify-center items-center bg-green-700 rounded-full px-2'>
+          <input type="text" value={this.state.password} readOnly />
+          </div>
+          
+        </div>
         <div>
           <label>Password Length: {this.state.length}</label>
           <input
             type="range"
             name="length"
             min="8"
-            max="50"
+            max="30"
             value={this.state.length}
             onChange={this.handleLengthChange}
           />
@@ -115,6 +138,7 @@ class PasswordGenerator extends Component {
           <label>Password:</label>
           <input type="text" value={this.state.password} readOnly />
         </div>
+        <button onClick={this.handleCopyClick}>Copy Password</button>
       </div>
     );
   }
