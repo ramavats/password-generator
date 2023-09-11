@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { FiRefreshCw } from 'react-icons/fi'
+import { FiCopy } from 'react-icons/fi'
 
 class PasswordGenerator extends Component {
   constructor(props) {
@@ -78,14 +80,24 @@ class PasswordGenerator extends Component {
 
   render() {
     return (
-      <div>
-        <h1 className='bg-black text-white text-center text-2xl p-2'>Password Generator</h1>
-        <div className='flex justify-center items-center p-2'>
-          <div className='flex justify-center items-center bg-green-700 rounded-full px-2'>
-          <input type="text" value={this.state.password} readOnly />
-          </div>
-          
+      <>
+      <nav>
+        <div className='bg-black flex justify-center items-center p-2'>
+          <h1 className='text-2xl text-white'>Password Generator</h1>
         </div>
+      </nav>
+      <section className='flex flex-col justify-center items-center mt-10'>
+        <div className='flex bg-green-800 lg:w-1/3 w-2/3 justify-between px-5 py-2 rounded-full flex-nowrap'>
+        <div className='flex justify-center items-center overflow-hidden '>
+          <p className='text-2xl text-white' type="text" value={this.state.password} readOnly >{this.state.password}</p>
+        </div>
+        <div className='flex items-center gap-3'>
+        < FiCopy className='h-5 w-5 lg:h-6 lg:w-6' onClick={this.handleCopyClick} />
+        < FiRefreshCw className=' h-5 w-5 lg:h-6 lg:w-6' onClick={this.generatePassword} />
+        </div>
+        </div>
+
+        {/* Second Section  */}
         <div>
           <label>Password Length: {this.state.length}</label>
           <input
@@ -139,7 +151,8 @@ class PasswordGenerator extends Component {
           <input type="text" value={this.state.password} readOnly />
         </div>
         <button onClick={this.handleCopyClick}>Copy Password</button>
-      </div>
+        </section>
+      </>
     );
   }
 }
