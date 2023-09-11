@@ -98,7 +98,7 @@ class PasswordGenerator extends Component {
         </div>
 
         {/* Second Section  */}
-        <div className='flex justify-center items-center'>
+        <div className='flex justify-center items-center gap-5 m-3 border-2 p-5 rounded-xl border-black'>
         <div>
           <label>Password Length: {this.state.length}</label>
           <input
