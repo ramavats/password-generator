@@ -89,7 +89,7 @@ class PasswordGenerator extends Component {
       <section className='flex flex-col justify-center items-center mt-10'>
         <div className='flex bg-green-800 lg:w-1/3 w-2/3 justify-between px-5 py-2 rounded-full flex-nowrap'>
         <div className='flex justify-center items-center overflow-hidden '>
-          <p className='text-2xl text-white' type="text" value={this.state.password} readOnly >{this.state.password}</p>
+          <p className='text-xl text-white' type="text" value={this.state.password} readOnly >{this.state.password}</p>
         </div>
         <div className='flex items-center gap-3 text-white'>
         < FiCopy className='h-5 w-5 lg:h-6 lg:w-6' onClick={this.handleCopyClick} />
@@ -98,6 +98,7 @@ class PasswordGenerator extends Component {
         </div>
 
         {/* Second Section  */}
+        <div className='flex justify-center items-center'>
         <div>
           <label>Password Length: {this.state.length}</label>
           <input
@@ -109,41 +110,46 @@ class PasswordGenerator extends Component {
             onChange={this.handleLengthChange}
           />
         </div>
-        <div>
-          <label>Include Uppercase:</label>
-          <input
+        <div className='flex flex-col justify-start items-start'>
+        <div className='flex gap-2'>
+        <input
             type="checkbox"
             name="includeUppercase"
             checked={this.state.includeUppercase}
             onChange={this.handleInputChange}
           />
+          <label>Include Uppercase:</label>
         </div>
-        <div>
-          <label>Include Lowercase:</label>
-          <input
+        <div className='flex gap-2'>
+        <input
             type="checkbox"
             name="includeLowercase"
             checked={this.state.includeLowercase}
             onChange={this.handleInputChange}
           />
+          <label>Include Lowercase:</label>
+          
         </div>
-        <div>
-          <label>Include Numbers:</label>
-          <input
+        <div className='flex gap-2'>
+        <input
             type="checkbox"
             name="includeNumbers"
             checked={this.state.includeNumbers}
             onChange={this.handleInputChange}
           />
+          <label>Include Numbers:</label>
+          
         </div>
-        <div>
-          <label>Include Symbols:</label>
-          <input
+        <div className='flex gap-2'>
+        <input
             type="checkbox"
             name="includeSymbols"
             checked={this.state.includeSymbols}
             onChange={this.handleInputChange}
           />
+          <label>Include Symbols:</label>
+        </div>
+        </div>
         </div>
         <button onClick={this.generatePassword}>Generate Password</button>
         <div>
