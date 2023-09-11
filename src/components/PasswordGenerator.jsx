@@ -91,7 +91,7 @@ class PasswordGenerator extends Component {
         <div className='flex justify-center items-center overflow-hidden '>
           <p className='text-2xl text-white' type="text" value={this.state.password} readOnly >{this.state.password}</p>
         </div>
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-3 text-white'>
         < FiCopy className='h-5 w-5 lg:h-6 lg:w-6' onClick={this.handleCopyClick} />
         < FiRefreshCw className=' h-5 w-5 lg:h-6 lg:w-6' onClick={this.generatePassword} />
         </div>
