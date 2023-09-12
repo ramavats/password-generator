@@ -83,7 +83,7 @@ class PasswordGenerator extends Component {
       <>
       <nav>
         <div className='bg-black flex justify-center items-center p-2'>
-          <h1 className='text-2xl text-white'>Password Generator</h1>
+          <h1 className='text-2xl text-white'>GenPass</h1>
         </div>
       </nav>
       <section className='flex flex-col justify-center items-center mt-10'>
