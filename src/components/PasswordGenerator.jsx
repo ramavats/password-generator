@@ -41,7 +41,33 @@ class PasswordGenerator extends Component {
       newPassword += validChars[randomIndex];
     }
 
-    this.setState({ password: newPassword });
+    this.setState({ password: newPassword }, () => {
+      this.checkPasswordStrength();
+    });
+  };
+
+  checkPasswordStrength = () => {
+    const { password } = this.state;
+
+    const minLength = 8;
+    const minUpperCase = 1;
+    const minLowerCase = 1;
+    const minNumbers = 1;
+    const minSymbols = 1;
+
+    const isLengthValid = password.length >= minLength;
+    const isUpperCaseValid = /[A-Z]/.test(password) && password.match(/[A-Z]/g).length >= minUpperCase;
+    const isLowerCaseValid = /[a-z]/.test(password) && password.match(/[a-z]/g).length >= minLowerCase;
+    const isNumbersValid = /[0-9]/.test(password) && password.match(/[0-9]/g).length >= minNumbers;
+    const isSymbolsValid = /[!@#$%^&*()_+[\]{}|;:,.<>?]/.test(password) && password.match(/[!@#$%^&*()_+[\]{}|;:,.<>?]/g).length >= minSymbols;
+
+    if (isLengthValid && isUpperCaseValid && isLowerCaseValid && isNumbersValid && isSymbolsValid) {
+      this.setState({ passwordStrength: 'strong' });
+    } else if (isLengthValid && ((isUpperCaseValid && isLowerCaseValid) || (isLowerCaseValid && isNumbersValid) || (isNumbersValid && isSymbolsValid))) {
+      this.setState({ passwordStrength: 'medium' });
+    } else {
+      this.setState({ passwordStrength: 'weak' });
+    }
   };
 
   handleInputChange = (event) => {
@@ -81,6 +107,28 @@ class PasswordGenerator extends Component {
         this.setState({ isCopied: false });
       }, 3000);
     }
+  };
+
+  renderPasswordStrengthMessage = () => {
+    const { passwordStrength } = this.state;
+
+    let message = '';
+
+    switch (passwordStrength) {
+      case 'weak':
+        message = 'Weak password! Try to make it stronger.';
+        break;
+      case 'medium':
+        message = 'Medium strength password. You can improve it.';
+        break;
+      case 'strong':
+        message = 'Strong password! Well done.';
+        break;
+      default:
+        message = '';
+    }
+
+    return message;
   };
 
 
@@ -163,6 +211,9 @@ class PasswordGenerator extends Component {
         </div>
         </div>
         <button onClick={this.generatePassword}>Generate Password</button>
+        <div className={`password-strength ${this.state.passwordStrength}`}>
+            {this.renderPasswordStrengthMessage()}
+          </div>
         <div>
           <label>Password:</label>
           <input type="text" value={this.state.password} readOnly />
