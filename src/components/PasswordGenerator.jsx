@@ -217,10 +217,6 @@ class PasswordGenerator extends Component {
         <div className={`password-strength ${this.state.passwordStrength}`}>
             {this.renderPasswordStrengthMessage()}
           </div>
-        <div>
-          <label>Password:</label>
-          <input type="text" value={this.state.password} readOnly />
-        </div>
         <button onClick={this.handleCopyClick}>Copy Password</button>
         </section>
       </>
