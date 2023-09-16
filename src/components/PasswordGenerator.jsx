@@ -140,8 +140,8 @@ class PasswordGenerator extends Component {
           <h1 className='text-2xl text-white'>GenPass</h1>
         </div>
       </nav>
-      <section className='flex flex-col justify-center items-center bg-gray-800 h-[80vh]'>
-        <div className='text-8xl text-center font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
+      <section className='flex flex-col justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black h-[85vh] lg:p-28 p-10'>
+        <div className='lg:text-8xl text-5xl text-center font-bold bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
         <button className='bg-white p-2 rounded-lg mt-10 font-bold'>Use GenPass</button>
       </section>
       <section className='flex flex-col justify-center items-center mt-10'>
