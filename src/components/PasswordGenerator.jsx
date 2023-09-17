@@ -165,7 +165,7 @@ class PasswordGenerator extends Component {
   to="password-gen" // Specify the id of the target section
   smooth={true} // Enable smooth scrolling
   duration={800} // Scroll duration in milliseconds
-  offset={0} // Adjust the scroll position if needed
+  offset={150} // Adjust the scroll position if needed
 >
   <button className="bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-3 px-6 font-inter rounded-lg mt-20 font-extrabold text-gray-800">
     Use GenPass
@@ -259,7 +259,7 @@ class PasswordGenerator extends Component {
         </div>
         </div>
 
-        <div className='flex gap-5 pb-3'>
+        <div className='flex gap-5 pb-10'>
         <button className='bg-black px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.generatePassword}>Generate</button>
         <button className='bg-green-600 px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.handleCopyClick}>{this.state.isCopied ? 'Copied' : 'Copy' }</button>
         </div>
