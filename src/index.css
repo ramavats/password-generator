@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.secure-strong {
+    @apply bg-green-400
+}
+
+.secure-medium {
+    @apply bg-yellow-400
+}
+
+.secure-weak {
+    @apply bg-red-600
+}

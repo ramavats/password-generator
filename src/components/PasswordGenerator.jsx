@@ -172,7 +172,7 @@ class PasswordGenerator extends Component {
   </button>
 </Link>
       </section>
-      <section id='password-gen' className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-screen pt-10'>
+      <section id='password-gen' className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-auto pt-10'>
         <h1 className='text-white p-5 font-extrabold lg:text-4xl md:text-3xl leading-tight text-2xl text-center font-inter px-10 lg:px-48 drop-shadow-md'>
         Effortlessly create a robust, randomly generated password using the user-friendly GenPass online tool.
         </h1>
@@ -194,7 +194,7 @@ class PasswordGenerator extends Component {
         <div className='flex flex-col md:w-[60%] w-[90%] lg:py-4 py-8 px-5 bg-white rounded-xl drop-shadow-xl'>
           <h1 className='text-2xl font-extrabold font-inter'>Customize Password</h1>
           <hr className='mt-2 border-1' />
-        <div className='flex justify-start md:gap-10 gap-5 mt-5'>
+        <div className='flex justify-start sm:flex-row flex-col sm:gap-10 gap-5 mt-5'>
           <div className='flex flex-col gap-1'>
           <label className='text-lg font-inter'>Password Length</label>
           <div className='flex gap-2'>
@@ -206,12 +206,14 @@ class PasswordGenerator extends Component {
             max="50"
             value={this.state.length}
             onChange={this.handleLengthChange}
-            className='lg:w-96 w-48'
+            className='lg:w-80 w-full'
           />
           </div>
+          <div className={`secure w-full flex justify-center px-4 py-2 rounded-lg mt-4 secure-${this.state.passwordStrength}`}>
           <p className={`uppercase password-strength ${this.state.passwordStrength} font-bold font-inter text-lg`}>
           {`${this.renderPasswordStrengthMessage()} Password`}
           </p>
+          </div>
           </div>
         
         <div className='flex flex-col text-lg font-inter justify-start items-start'>
