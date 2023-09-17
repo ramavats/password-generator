@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { FiRefreshCw, FiCopy, FiCheck } from 'react-icons/fi'
 
+
 class PasswordGenerator extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +13,8 @@ class PasswordGenerator extends Component {
       includeLowercase: true,
       includeNumbers: true,
       includeSymbols: true,
-      isCopied: false, // Added state to track whether password is copied
+      isCopied: false,
+      isSpinning: false,
     };
   }
 
@@ -21,11 +24,13 @@ class PasswordGenerator extends Component {
   }
 
   generatePassword = () => {
+    this.setState({ isSpinning: true });
     const { length, includeUppercase, includeLowercase, includeNumbers, includeSymbols } = this.state;
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const numberChars = '0123456789';
     const symbolChars = '!@#$%^&*()_+[]{}|;:,.<>?';
+
 
     let validChars = '';
 
@@ -44,12 +49,17 @@ class PasswordGenerator extends Component {
     this.setState({ password: newPassword }, () => {
       this.checkPasswordStrength();
     });
+    setTimeout(() => {
+      this.setState({ isSpinning: false }, () => {
+        this.checkPasswordStrength();
+      });
+    }, 500);
   };
 
   checkPasswordStrength = () => {
     const { password } = this.state;
 
-    const minLength = 8;
+    const minLength = 10;
     const minUpperCase = 1;
     const minLowerCase = 1;
     const minNumbers = 1;
@@ -116,13 +126,13 @@ class PasswordGenerator extends Component {
 
     switch (passwordStrength) {
       case 'weak':
-        message = 'Weak password! Try to make it stronger.';
+        message = 'Weak';
         break;
       case 'medium':
-        message = 'Medium strength password. You can improve it.';
+        message = 'Medium';
         break;
       case 'strong':
-        message = 'Strong password! Well done.';
+        message = 'Strong';
         break;
       default:
         message = '';
@@ -140,40 +150,53 @@ class PasswordGenerator extends Component {
           <h1 className='text-2xl text-white'>GenPass</h1>
         </div>
       </nav>
-      <section className='flex flex-col justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black h-[85vh] lg:p-56 p-10'>
-        <div className='lg:text-7xl text-5xl text-center font-bold bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
-        <button className='bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-2 px-4 rounded-lg mt-20 font-bold'>Use GenPass</button>
+      <section className='flex flex-col justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black h-[80vh] lg:p-56 p-10'>
+        <div className='lg:text-7xl font-inter tracking-tight text-5xl text-center font-bold bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
+        <button className='bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-3 px-6 font-inter rounded-lg mt-20 font-extrabold text-gray-800'>Use GenPass</button>
       </section>
-      <section className='flex flex-col justify-center items-center mt-10'>
-        <div className='flex bg-green-800 lg:w-1/3 w-2/3 justify-between px-5 py-2 rounded-full flex-nowrap'>
-        <div className='flex justify-center items-center overflow-hidden '>
-          <input className='text-xl' type="text" value={this.state.password} readOnly />
-        </div>
-        <div className='flex items-center gap-3 text-white'>
+      <section className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-auto pt-10'>
+        <h1 className='text-white p-5 font-extrabold lg:text-4xl md:text-3xl leading-tight text-2xl text-center font-inter px-10 lg:px-48 drop-shadow-md'>
+        Effortlessly create a robust, randomly generated password using the user-friendly GenPass online tool.
+        </h1>
+        <div className='flex justify-between items-center rounded-lg drop-shadow-lg md:w-[60%] w-[90%] lg:py-5 py-4 px-5 bg-white'>
+        <input type="text" placeholder="Type here" className="input p-2 bg-transparent w-full font-mono md:text-3xl text-xl" value={this.state.password} readOnly />
+        <div className='flex items-center gap-3 text-black pl-4'>
         {this.state.isCopied ? (
-                < FiCheck className='h-5 w-5 lg:h-6 lg:w-6' onClick={this.handleCopyClick} />
+                < FiCheck className='h-5 w-5 lg:h-6 lg:w-7' onClick={this.handleCopyClick} />
               ) : (
-                < FiCopy className='h-5 w-5 lg:h-6 lg:w-6' onClick={this.handleCopyClick} />
-              )}
+                < FiCopy className='h-5 w-5 lg:h-6 lg:w-7' onClick={this.handleCopyClick} />
+              )
+        }
         
-        < FiRefreshCw className=' h-5 w-5 lg:h-6 lg:w-6' onClick={this.generatePassword} />
+        < FiRefreshCw className={`h-5 w-5 lg:h-6 lg:w-6 ${this.state.isSpinning ? 'animate-spin' : ''}`} onClick={this.generatePassword} />
         </div>
         </div>
 
         {/* Second Section  */}
-        <div className='flex justify-center items-center gap-5 m-3 border-2 p-5 rounded-xl border-black flex-col lg:flex-row'>
-        <div>
-          <label>Password Length: {this.state.length}</label>
+        <div className='flex flex-col md:w-[60%] w-[90%] lg:py-4 py-8 px-5 bg-white rounded-xl drop-shadow-xl'>
+          <h1 className='text-2xl font-extrabold font-inter'>Customize Password</h1>
+          <hr className='mt-2 border-1' />
+        <div className='flex justify-start md:gap-10 gap-5 mt-5'>
+          <div className='flex flex-col gap-1'>
+          <label className='text-lg font-inter'>Password Length</label>
+          <div className='flex gap-2'>
+          <input type='number' className='w-10 text-center text-lg' value={this.state.length} />
           <input
             type="range"
             name="length"
             min="8"
-            max="30"
+            max="50"
             value={this.state.length}
             onChange={this.handleLengthChange}
+            className='lg:w-96 w-48'
           />
-        </div>
-        <div className='flex flex-col justify-start items-start'>
+          </div>
+          <p className={`uppercase password-strength ${this.state.passwordStrength} font-bold font-inter text-lg`}>
+          {`${this.renderPasswordStrengthMessage()} Password`}
+          </p>
+          </div>
+        
+        <div className='flex flex-col text-lg font-inter justify-start items-start'>
         <div className='flex gap-2'>
         <input
             type="checkbox"
@@ -181,7 +204,7 @@ class PasswordGenerator extends Component {
             checked={this.state.includeUppercase}
             onChange={this.handleInputChange}
           />
-          <label>Include Uppercase:</label>
+          <label>Uppercase</label>
         </div>
         <div className='flex gap-2'>
         <input
@@ -190,7 +213,7 @@ class PasswordGenerator extends Component {
             checked={this.state.includeLowercase}
             onChange={this.handleInputChange}
           />
-          <label>Include Lowercase:</label>
+          <label>Lowercase</label>
           
         </div>
         <div className='flex gap-2'>
@@ -200,7 +223,7 @@ class PasswordGenerator extends Component {
             checked={this.state.includeNumbers}
             onChange={this.handleInputChange}
           />
-          <label>Include Numbers:</label>
+          <label>Numbers</label>
           
         </div>
         <div className='flex gap-2'>
@@ -210,15 +233,16 @@ class PasswordGenerator extends Component {
             checked={this.state.includeSymbols}
             onChange={this.handleInputChange}
           />
-          <label>Include Symbols:</label>
+          <label>Symbols</label>
         </div>
         </div>
         </div>
-        <button onClick={this.generatePassword}>Generate Password</button>
-        <div className={`password-strength ${this.state.passwordStrength}`}>
-            {this.renderPasswordStrengthMessage()}
-          </div>
-        <button onClick={this.handleCopyClick}>Copy</button>
+        </div>
+
+        <div className='flex gap-5 pb-3'>
+        <button className='bg-black px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.generatePassword}>Generate</button>
+        <button className='bg-green-600 px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.handleCopyClick}>{this.state.isCopied ? 'Copied' : 'Copy' }</button>
+        </div>
         </section>
       </>
     );
