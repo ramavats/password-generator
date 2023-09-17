@@ -264,6 +264,9 @@ class PasswordGenerator extends Component {
         <button className='bg-green-600 px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.handleCopyClick}>{this.state.isCopied ? 'Copied' : 'Copy' }</button>
         </div>
         </section>
+        <footer className=' bg-gray-900 p-5 flex justify-center'>
+        <p className='text-white font-inter'>Made with <span className='animate-pulse text-xl'>💖</span> by <a href='https://github.com/ramavats'>Rama</a></p>
+        </footer>
       </>
     );
   }
