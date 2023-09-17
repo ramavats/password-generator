@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { FiRefreshCw, FiCopy, FiCheck } from 'react-icons/fi'
+import { Link, animateScroll as scroll } from 'react-scroll'; // Import Link and scroll
 
 
 class PasswordGenerator extends Component {
@@ -22,6 +23,14 @@ class PasswordGenerator extends Component {
     // Generate the initial password when the component mounts.
     this.generatePassword();
   }
+
+  scrollToPasswordGen = () => {
+    scroll.scrollTo("password-gen", {
+      duration: 800, // Scroll duration in milliseconds
+      smooth: "easeInOutQuart", // Easing function
+    });
+  };
+
 
   generatePassword = () => {
     this.setState({ isSpinning: true });
@@ -147,14 +156,23 @@ class PasswordGenerator extends Component {
       <>
       <nav>
         <div className='bg-black flex justify-center items-center p-2'>
-          <h1 className='text-2xl text-white'>GenPass</h1>
+          <h1 className='text-3xl font-inter font-black bg-gradient-to-r from-sky-400 to-blue-500 text-transparent bg-clip-text '>{`<GenPass>`}</h1>
         </div>
       </nav>
       <section className='flex flex-col justify-center items-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-700 via-gray-900 to-black h-[80vh] lg:p-56 p-10'>
         <div className='lg:text-7xl font-inter tracking-tight text-5xl text-center font-bold bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
-        <button className='bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-3 px-6 font-inter rounded-lg mt-20 font-extrabold text-gray-800'>Use GenPass</button>
+        <Link
+  to="password-gen" // Specify the id of the target section
+  smooth={true} // Enable smooth scrolling
+  duration={800} // Scroll duration in milliseconds
+  offset={0} // Adjust the scroll position if needed
+>
+  <button className="bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-3 px-6 font-inter rounded-lg mt-20 font-extrabold text-gray-800">
+    Use GenPass
+  </button>
+</Link>
       </section>
-      <section id='password-gen' className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-auto pt-10'>
+      <section id='password-gen' className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-screen pt-10'>
         <h1 className='text-white p-5 font-extrabold lg:text-4xl md:text-3xl leading-tight text-2xl text-center font-inter px-10 lg:px-48 drop-shadow-md'>
         Effortlessly create a robust, randomly generated password using the user-friendly GenPass online tool.
         </h1>
