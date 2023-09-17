@@ -154,7 +154,7 @@ class PasswordGenerator extends Component {
         <div className='lg:text-7xl font-inter tracking-tight text-5xl text-center font-bold bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 text-transparent bg-clip-text'>Stronger Passwords, One Click Away!</div>
         <button className='bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500 py-3 px-6 font-inter rounded-lg mt-20 font-extrabold text-gray-800'>Use GenPass</button>
       </section>
-      <section className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-auto pt-10'>
+      <section id='password-gen' className='flex flex-col gap-5 justify-center items-center bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 h-auto pt-10'>
         <h1 className='text-white p-5 font-extrabold lg:text-4xl md:text-3xl leading-tight text-2xl text-center font-inter px-10 lg:px-48 drop-shadow-md'>
         Effortlessly create a robust, randomly generated password using the user-friendly GenPass online tool.
         </h1>
