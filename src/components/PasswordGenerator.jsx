@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { FiRefreshCw, FiCopy, FiCheck } from 'react-icons/fi'
+import { BsGithub, BsFacebook } from 'react-icons/bs'
 import { Link, animateScroll as scroll } from 'react-scroll'; // Import Link and scroll
 
 
@@ -264,8 +265,12 @@ class PasswordGenerator extends Component {
         <button className='bg-green-600 px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.handleCopyClick}>{this.state.isCopied ? 'Copied' : 'Copy' }</button>
         </div>
         </section>
-        <footer className=' bg-gray-900 p-5 flex justify-center'>
-        <p className='text-white font-inter'>Made with <span className='animate-pulse text-xl'>💖</span> by <a href='https://github.com/ramavats'>Rama</a></p>
+        <footer className=' bg-gray-900 py-5 px-10 flex justify-between items-center'>
+        <p className='text-white font-inter'>Made with <span className='animate-pulse text-xl'>💖</span> by Rama</p>
+        <div className='text-white flex gap-5'>
+          <a href='https://github.com/ramavats'>< BsGithub /></a>
+          <a href='https://facebook.com/ramaxvats'>< BsFacebook /></a>
+        </div>
         </footer>
       </>
     );
