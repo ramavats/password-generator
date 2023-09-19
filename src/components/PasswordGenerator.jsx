@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { FiRefreshCw, FiCopy, FiCheck } from 'react-icons/fi'
 import { BsGithub, BsFacebook } from 'react-icons/bs'
 import { Link, animateScroll as scroll } from 'react-scroll'; // Import Link and scroll
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 class PasswordGenerator extends Component {
@@ -121,6 +123,7 @@ class PasswordGenerator extends Component {
 
       // Set the state to indicate that the password is copied.
       this.setState({ isCopied: true });
+      toast.success("Copied!")
 
       // Reset the copied state after a short delay (e.g., 3 seconds).
       setTimeout(() => {
@@ -263,6 +266,18 @@ class PasswordGenerator extends Component {
         <div className='flex gap-5 pb-10'>
         <button className='bg-black px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.generatePassword}>Generate</button>
         <button className='bg-green-600 px-6 py-3 rounded-xl text-white font-inter font-medium' onClick={this.handleCopyClick}>{this.state.isCopied ? 'Copied' : 'Copy' }</button>
+        <ToastContainer
+position="bottom-center"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
         </div>
         </section>
         <footer className=' bg-gray-900 py-5 px-10 flex justify-between items-center'>
@@ -271,6 +286,7 @@ class PasswordGenerator extends Component {
           <a href='https://github.com/ramavats'>< BsGithub /></a>
           <a href='https://facebook.com/ramaxvats'>< BsFacebook /></a>
         </div>
+        
         </footer>
       </>
     );
