@@ -123,7 +123,7 @@ class PasswordGenerator extends Component {
 
       // Set the state to indicate that the password is copied.
       this.setState({ isCopied: true });
-      toast.success("Copied!")
+      toast.success("Password Copied!")
 
       // Reset the copied state after a short delay (e.g., 3 seconds).
       setTimeout(() => {
